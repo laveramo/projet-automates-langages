@@ -2,25 +2,22 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "y.tab.h"
 %}
 
 
 %option noyywrap
-%option noinput
-%option nounput
 
 
 %%
    
-
-
-"if"                       { printf("tIF\n"); }
-"else"                     { printf("tELSE\n"); }
-"while"                    { printf("tWHILE\n"); }
-"print"                    { printf("tPRINT\n"); }
-"return"                   { printf("tRETURN\n"); }
-"int"                      { printf("tINT\n"); }
-"void"                     { printf("tVOID\n"); }
+"if"     { printf("tIF\n"); }
+"else"   { printf("tELSE\n"); }
+"while"  { printf("tWHILE\n"); }
+"print"  { printf("tPRINT\n"); }
+"return" { printf("tRETURN\n"); }
+"int"    { return tINT; }
+"void"   { return tVOID; }
 
 
 "+"       {printf("tADD\n");}
@@ -39,15 +36,15 @@
 "&&"      {printf("tAND\n");}
 "||"      {printf("tOR\n");}
 "!"       {printf("tNOT\n");}
-"{"       {printf("tLBRACE\n");}
-"}"       {printf("tRBRACE\n");}
-"("       {printf("tLPAR\n");}
-")"       {printf("tRPAR\n");}
+"{"       { return tLBRACE; }
+"}"       { return tRBRACE; }
+"("       { return tLPAR; }
+")"       { return tRPAR; }
 
 
 
 ";"      {printf("tSEMI\n");}
-","     {printf("tCOMMA\n");}
+","     { return tCOMMA; }
 
 
 
@@ -63,7 +60,3 @@
 . {printf( "tERROR\n"); } 
 %%
 
-
-int main(int argc, char **argv) {
-  yylex();
-}
