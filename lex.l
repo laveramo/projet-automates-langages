@@ -48,7 +48,7 @@
 
 
 
-[a-zA-Z][a-zA-Z0-9_]*      { printf("tID: '%s'\n",yytext); }
+[_a-zA-Z][a-zA-Z0-9_]*      { return tID; }
 [0-9]+             { long int number = strtol(yytext, NULL, 0);
                     printf("tNB: '%ld[0x%lx]'\n", number, number); } 
 0x[0-9A-Fa-f]+     { long int number = strtol(yytext, NULL, 0);
