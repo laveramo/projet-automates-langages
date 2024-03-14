@@ -7,12 +7,14 @@
 
 
 %option noyywrap
+%option noinput
+%option nounput
 
 
 %%
    
-"if"     { printf("tIF\n"); }
-"else"   { printf("tELSE\n"); }
+"if"     { return tIF; }
+"else"   { return tELSE; }
 "while"  { printf("tWHILE\n"); }
 "print"  { printf("tPRINT\n"); }
 "return" { printf("tRETURN\n"); }
@@ -24,18 +26,18 @@
 "-"       {printf("tSUB\n");}
 "*"       {printf("tMUL\n");}
 "/"       {printf("tDIV\n");}
-"<"       {printf("tLT\n");}
-">"       {printf("tGT\n");}
+"<"       { return tLT; }
+">"       { return tGT; }
 
   
-"!="      {printf("tNE\n");}
-"=="      {printf("tEQ\n");}
-">="      {printf("tGE\n");}
-"<="      {printf("tLE\n");}
- "="      {printf("tASSIGN\n");}
-"&&"      {printf("tAND\n");}
-"||"      {printf("tOR\n");}
-"!"       {printf("tNOT\n");}
+"!="      { return tNE; }
+"=="      { return tEQ; }
+">="      { return tGE; }
+"<="      { return tLE; }
+ "="      { return tASSIGN; }
+"&&"      { return tAND; }
+"||"      { return tOR; }
+"!"       { printf("tNOT\n"); }
 "{"       { return tLBRACE; }
 "}"       { return tRBRACE; }
 "("       { return tLPAR; }
@@ -43,20 +45,20 @@
 
 
 
-";"      {printf("tSEMI\n");}
+";"      { return tSEMI; }
 ","     { return tCOMMA; }
 
 
 
 [_a-zA-Z][a-zA-Z0-9_]*      { return tID; }
 [0-9]+             { long int number = strtol(yytext, NULL, 0);
-                    printf("tNB: '%ld[0x%lx]'\n", number, number); } 
+                    return tNB; } 
 0x[0-9A-Fa-f]+     { long int number = strtol(yytext, NULL, 0);
-                    printf("tNB: '%ld[0x%lx]'\n", number, number);  } 
+                    return tNB;  } 
 
 
 \/\/[^\n]*|\/\*([^*]|\*+[^*/])*\*+\/ {/* pour ignorer les commentaires */ }
 [ \t\n]+      {/*let the whitespace pass*/}
-. {printf( "tERROR\n"); } 
+. {printf( "tERROR\n"); }
 %%
 

@@ -5,7 +5,7 @@
 void yyerror(char *s);
 %}
 
-%token tVOID tINT tID tLPAR tRPAR tCOMMA tLBRACE tRBRACE
+%token tVOID tINT tID tNB tLPAR tRPAR tCOMMA tLBRACE tRBRACE tIF tELSE tASSIGN tSEMI tNE tEQ tGE tLE tAND tOR tLT tGT
 
  /* rules */
 %%
@@ -32,7 +32,36 @@ ParamsB :
 Body : tLBRACE Code tRBRACE
     ;
 
-Code :
+Code : 
+    | Declaration Code
+    | If Code
+    // | While Code
+    ;
+
+// int x = 4; declaración
+
+Declaration : tINT tID tASSIGN tINT tSEMI
+    | tINT tID tASSIGN tID tSEMI
+    ;
+
+// Declaraciones 'If' de una línea ??
+If : tIF tLPAR Expression tRPAR tLBRACE Code tRBRACE BodyIf
+    ;
+
+BodyIf :
+    | tELSE tLBRACE Code tRBRACE
+    | tELSE If
+    ;
+
+Expression : tNB ExpSymbol tNB
+    | tNB ExpSymbol tID
+    | tID ExpSymbol tNB
+    
+    // preguntar sobre el ID en la expresión para verificar que se haya declarado anteriormente
+    | tID ExpSymbol tID
+    ;
+
+ExpSymbol : tNE | tEQ | tGE | tLE | tAND | tOR | tLT | tGT
     ;
 %%
 
