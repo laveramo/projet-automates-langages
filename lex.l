@@ -7,13 +7,14 @@
 
 
 %option noyywrap
-
+%option noinput
+%option nounput
 
 %%
    
 "if"     { printf("tIF\n"); }
 "else"   { printf("tELSE\n"); }
-"while"  { printf("tWHILE\n"); }
+"while"  { return tWHILE; }
 "print"  { printf("tPRINT\n"); }
 "return" { printf("tRETURN\n"); }
 "int"    { return tINT; }
@@ -24,18 +25,18 @@
 "-"       {printf("tSUB\n");}
 "*"       {printf("tMUL\n");}
 "/"       {printf("tDIV\n");}
-"<"       {printf("tLT\n");}
-">"       {printf("tGT\n");}
+"<"       {return tLT; }
+">"       {return tGT; }
 
   
-"!="      {printf("tNE\n");}
-"=="      {printf("tEQ\n");}
-">="      {printf("tGE\n");}
-"<="      {printf("tLE\n");}
- "="      {printf("tASSIGN\n");}
-"&&"      {printf("tAND\n");}
-"||"      {printf("tOR\n");}
-"!"       {printf("tNOT\n");}
+"!="      { return tNE; }
+"=="      { return tEQ; }
+">="      { return tGE; }
+"<="      { return tLE; }
+ "="      { printf("tASSIGN\n"); }
+"&&"      { return tAND; }
+"||"      { return tOR; }
+"!"       { printf("tNOT\n");}
 "{"       { return tLBRACE; }
 "}"       { return tRBRACE; }
 "("       { return tLPAR; }
@@ -49,10 +50,12 @@
 
 
 [_a-zA-Z][a-zA-Z0-9_]*      { return tID; }
-[0-9]+             { long int number = strtol(yytext, NULL, 0);
-                    printf("tNB: '%ld[0x%lx]'\n", number, number); } 
-0x[0-9A-Fa-f]+     { long int number = strtol(yytext, NULL, 0);
-                    printf("tNB: '%ld[0x%lx]'\n", number, number);  } 
+[0-9]+             { /* long int number = strtol(yytext, NULL, 0);
+                    return("tNB: '%ld[0x%lx]'\n", number, number); */
+                    return tNB; } 
+0x[0-9A-Fa-f]+     { /*long int number = strtol(yytext, NULL, 0);
+                    return("tNB: '%ld[0x%lx]'\n", number, number);*/
+                    return tNB;  } 
 
 
 \/\/[^\n]*|\/\*([^*]|\*+[^*/])*\*+\/ {/* pour ignorer les commentaires */ }

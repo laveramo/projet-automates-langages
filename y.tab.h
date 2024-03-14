@@ -56,12 +56,23 @@ extern int yydebug;
     YYUNDEF = 257,                 /* "invalid token"  */
     tVOID = 258,                   /* tVOID  */
     tINT = 259,                    /* tINT  */
-    tID = 260,                     /* tID  */
-    tLPAR = 261,                   /* tLPAR  */
-    tRPAR = 262,                   /* tRPAR  */
-    tCOMMA = 263,                  /* tCOMMA  */
-    tLBRACE = 264,                 /* tLBRACE  */
-    tRBRACE = 265                  /* tRBRACE  */
+    tNB = 260,                     /* tNB  */
+    tID = 261,                     /* tID  */
+    tLPAR = 262,                   /* tLPAR  */
+    tRPAR = 263,                   /* tRPAR  */
+    tCOMMA = 264,                  /* tCOMMA  */
+    tLBRACE = 265,                 /* tLBRACE  */
+    tRBRACE = 266,                 /* tRBRACE  */
+    tNE = 267,                     /* tNE  */
+    tEQ = 268,                     /* tEQ  */
+    tGE = 269,                     /* tGE  */
+    tLE = 270,                     /* tLE  */
+    tAND = 271,                    /* tAND  */
+    tOR = 272,                     /* tOR  */
+    tLT = 273,                     /* tLT  */
+    tGT = 274,                     /* tGT  */
+    tWHILE = 275,                  /* tWHILE  */
+    tIF = 276                      /* tIF  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -72,12 +83,23 @@ extern int yydebug;
 #define YYUNDEF 257
 #define tVOID 258
 #define tINT 259
-#define tID 260
-#define tLPAR 261
-#define tRPAR 262
-#define tCOMMA 263
-#define tLBRACE 264
-#define tRBRACE 265
+#define tNB 260
+#define tID 261
+#define tLPAR 262
+#define tRPAR 263
+#define tCOMMA 264
+#define tLBRACE 265
+#define tRBRACE 266
+#define tNE 267
+#define tEQ 268
+#define tGE 269
+#define tLE 270
+#define tAND 271
+#define tOR 272
+#define tLT 273
+#define tGT 274
+#define tWHILE 275
+#define tIF 276
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

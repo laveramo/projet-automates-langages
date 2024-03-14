@@ -5,7 +5,7 @@
 void yyerror(char *s);
 %}
 
-%token tVOID tINT tID tLPAR tRPAR tCOMMA tLBRACE tRBRACE
+%token tVOID tINT tNB tID tLPAR tRPAR tCOMMA tLBRACE tRBRACE tNE tEQ tGE tLE tAND tOR tLT tGT tWHILE tIF
 
  /* rules */
 %%
@@ -32,7 +32,28 @@ ParamsB :
 Body : tLBRACE Code tRBRACE
     ;
 
-Code :
+Code : 
+    | Declaration Code
+    | If Code
+    | While Code
+    ;
+
+Declaration :
+    ;
+
+If :
+    ;
+
+While : tWHILE tLPAR Expression tRPAR Body
+    ;
+
+Expression : tNB ExpSymbol tNB
+    | tNB ExpSymbol tID
+    | tID ExpSymbol tNB
+    | tID ExpSymbol tID
+    ;
+
+ExpSymbol : tNE | tEQ | tGE | tLE | tAND | tOR | tLT | tGT
     ;
 %%
 
