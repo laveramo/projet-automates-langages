@@ -15,7 +15,7 @@
    
 "if"     { return tIF; }
 "else"   { return tELSE; }
-"while"  { printf("tWHILE\n"); }
+"while"  { return tWHILE; }
 "print"  { printf("tPRINT\n"); }
 "return" { printf("tRETURN\n"); }
 "int"    { return tINT; }
@@ -51,9 +51,11 @@
 
 
 [_a-zA-Z][a-zA-Z0-9_]*      { return tID; }
-[0-9]+             { long int number = strtol(yytext, NULL, 0);
+[0-9]+             { /* long int number = strtol(yytext, NULL, 0);
+                    return("tNB: '%ld[0x%lx]'\n", number, number); */
                     return tNB; } 
-0x[0-9A-Fa-f]+     { long int number = strtol(yytext, NULL, 0);
+0x[0-9A-Fa-f]+     { /*long int number = strtol(yytext, NULL, 0);
+                    return("tNB: '%ld[0x%lx]'\n", number, number);*/
                     return tNB;  } 
 
 

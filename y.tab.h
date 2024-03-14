@@ -56,13 +56,19 @@ extern int yydebug;
     YYUNDEF = 257,                 /* "invalid token"  */
     tVOID = 258,                   /* tVOID  */
     tINT = 259,                    /* tINT  */
+<<<<<<< HEAD
     tID = 260,                     /* tID  */
     tNB = 261,                     /* tNB  */
+=======
+    tNB = 260,                     /* tNB  */
+    tID = 261,                     /* tID  */
+>>>>>>> dc4063c2bea54c1f70efd6996d619ae2edec7c5f
     tLPAR = 262,                   /* tLPAR  */
     tRPAR = 263,                   /* tRPAR  */
     tCOMMA = 264,                  /* tCOMMA  */
     tLBRACE = 265,                 /* tLBRACE  */
     tRBRACE = 266,                 /* tRBRACE  */
+<<<<<<< HEAD
     tIF = 267,                     /* tIF  */
     tELSE = 268,                   /* tELSE  */
     tASSIGN = 269,                 /* tASSIGN  */
@@ -75,6 +81,18 @@ extern int yydebug;
     tOR = 276,                     /* tOR  */
     tLT = 277,                     /* tLT  */
     tGT = 278                      /* tGT  */
+=======
+    tNE = 267,                     /* tNE  */
+    tEQ = 268,                     /* tEQ  */
+    tGE = 269,                     /* tGE  */
+    tLE = 270,                     /* tLE  */
+    tAND = 271,                    /* tAND  */
+    tOR = 272,                     /* tOR  */
+    tLT = 273,                     /* tLT  */
+    tGT = 274,                     /* tGT  */
+    tWHILE = 275,                  /* tWHILE  */
+    tIF = 276                      /* tIF  */
+>>>>>>> dc4063c2bea54c1f70efd6996d619ae2edec7c5f
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -85,13 +103,19 @@ extern int yydebug;
 #define YYUNDEF 257
 #define tVOID 258
 #define tINT 259
+<<<<<<< HEAD
 #define tID 260
 #define tNB 261
+=======
+#define tNB 260
+#define tID 261
+>>>>>>> dc4063c2bea54c1f70efd6996d619ae2edec7c5f
 #define tLPAR 262
 #define tRPAR 263
 #define tCOMMA 264
 #define tLBRACE 265
 #define tRBRACE 266
+<<<<<<< HEAD
 #define tIF 267
 #define tELSE 268
 #define tASSIGN 269
@@ -104,6 +128,18 @@ extern int yydebug;
 #define tOR 276
 #define tLT 277
 #define tGT 278
+=======
+#define tNE 267
+#define tEQ 268
+#define tGE 269
+#define tLE 270
+#define tAND 271
+#define tOR 272
+#define tLT 273
+#define tGT 274
+#define tWHILE 275
+#define tIF 276
+>>>>>>> dc4063c2bea54c1f70efd6996d619ae2edec7c5f
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
