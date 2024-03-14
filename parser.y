@@ -5,11 +5,7 @@
 void yyerror(char *s);
 %}
 
-<<<<<<< HEAD
-%token tVOID tINT tID tNB tLPAR tRPAR tCOMMA tLBRACE tRBRACE tIF tELSE tASSIGN tSEMI tNE tEQ tGE tLE tAND tOR tLT tGT
-=======
-%token tVOID tINT tNB tID tLPAR tRPAR tCOMMA tLBRACE tRBRACE tNE tEQ tGE tLE tAND tOR tLT tGT tWHILE tIF
->>>>>>> dc4063c2bea54c1f70efd6996d619ae2edec7c5f
+%token tVOID tINT tID tNB tLPAR tRPAR tCOMMA tLBRACE tRBRACE tIF tELSE tASSIGN tSEMI tNE tEQ tGE tLE tAND tOR tLT tGT tWHILE
 
  /* rules */
 %%
@@ -39,8 +35,7 @@ Body : tLBRACE Code tRBRACE
 Code : 
     | Declaration Code
     | If Code
-<<<<<<< HEAD
-    // | While Code
+    | While Code
     ;
 
 // int x = 4; declaración
@@ -56,28 +51,16 @@ If : tIF tLPAR Expression tRPAR tLBRACE Code tRBRACE BodyIf
 BodyIf :
     | tELSE tLBRACE Code tRBRACE
     | tELSE If
-=======
-    | While Code
-    ;
-
-Declaration :
-    ;
-
-If :
     ;
 
 While : tWHILE tLPAR Expression tRPAR Body
->>>>>>> dc4063c2bea54c1f70efd6996d619ae2edec7c5f
     ;
 
 Expression : tNB ExpSymbol tNB
     | tNB ExpSymbol tID
     | tID ExpSymbol tNB
-<<<<<<< HEAD
     
     // preguntar sobre el ID en la expresión para verificar que se haya declarado anteriormente
-=======
->>>>>>> dc4063c2bea54c1f70efd6996d619ae2edec7c5f
     | tID ExpSymbol tID
     ;
 
