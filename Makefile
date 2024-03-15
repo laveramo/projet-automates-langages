@@ -1,4 +1,4 @@
-GRM=parser.y
+GRM=test.y
 LEX=lex.l
 BIN=parser
 

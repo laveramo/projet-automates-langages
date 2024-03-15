@@ -16,16 +16,16 @@
 "if"     { return tIF; }
 "else"   { return tELSE; }
 "while"  { return tWHILE; }
-"print"  { printf("tPRINT\n"); }
-"return" { printf("tRETURN\n"); }
+"print"  { return tPRINT; }
+"return" { return tRETURN; }
 "int"    { return tINT; }
 "void"   { return tVOID; }
 
 
-"+"       {printf("tADD\n");}
-"-"       {printf("tSUB\n");}
-"*"       {printf("tMUL\n");}
-"/"       {printf("tDIV\n");}
+"+"       { return tADD; }
+"-"       { return tSUB; }
+"*"       { return tMUL; }
+"/"       { return tDIV; }
 "<"       { return tLT; }
 ">"       { return tGT; }
 
