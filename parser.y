@@ -2,70 +2,106 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
+int yylex(void);
 void yyerror(char *s);
 %}
 
-%token tVOID tINT tID tNB tLPAR tRPAR tCOMMA tLBRACE tRBRACE tIF tELSE tASSIGN tSEMI tNE tEQ tGE tLE tAND tOR tLT tGT tWHILE
 
- /* rules */
+%union {
+    int ival;
+}
+
+/* Definición de tokens */
+%token tVOID tINT tID tLPAR tRPAR tCOMMA tLBRACE tRBRACE tIF tELSE tSEMI tAND tOR tWHILE tRETURN tPRINT tNOT
+%token <ival> tNB
+
+/* 'left' para que asocie de izquierda a derecha -> 2+3+4 = (2+3)+4 */
+%left tLT tGT tASSIGN tNE tGE tLE tEQ
+%left tADD tSUB
+%left tMUL tDIV
+
+/* Inicio del programa */
+%start program
 %%
 
-Prog : Fun Prog
-    | Fun
+program : fun | program fun ;
+
+fun : void_fun | int_fun ;
+
+void_fun : tVOID tID tLPAR params tRPAR fun_body;
+
+int_fun : tINT tID tLPAR params tRPAR fun_body;
+
+fun_body : tLBRACE instructions tRBRACE 
+    | tLBRACE tRBRACE 
+    | tLBRACE instructions return_instruction tRBRACE
     ;
 
-Fun : tINT tID tLPAR Params tRPAR Body
-    | tVOID tID tLPAR Params tRPAR Body
+params : /* empty */ | param | params tCOMMA param | tVOID ;
+
+param : tINT tID ;
+
+instructions : instruction
+    | instruction instructions
     ;
 
-Params : ParamsA
-
-ParamsA : 
-    | tVOID
-    | tINT tID ParamsB
+instruction : assign_instruction
+    | declaration_instruction
+    | if_instruction
+    | while_instruction
+    | print_instruction
     ;
 
-ParamsB :
-    | tCOMMA tINT tID ParamsB
+item : tID | tNB ;
+
+expression : item
+    | expression tADD expression
+    | expression tSUB expression
+    | expression tMUL expression
+    | expression tDIV expression
+    | tLPAR expression tRPAR
+    | item tLT item
+    | item tGT item
+    | item tASSIGN item
+    | item tNE item
+    | item tGE item
+    | item tLE item
+    | item tEQ item
+    | item tAND item
+    | item tOR item
+    | tNOT expression
     ;
 
-Body : tLBRACE Code tRBRACE
+assign_instruction : tID tASSIGN expression tSEMI
+    | tID tASSIGN fun_call tSEMI
+;
+
+declaration_options : tID
+    | tID tCOMMA declaration_options
     ;
 
-Code : 
-    | Declaration Code
-    | If Code
-    | While Code
+declaration_instruction : tINT declaration_options tSEMI
+    | tINT declaration_options tASSIGN expression tSEMI
+    | tINT declaration_options tASSIGN fun_call tSEMI
     ;
 
-// int x = 4; declaración
+fun_call : tID tLPAR fun_call_params tRPAR ;
 
-Declaration : tINT tID tASSIGN tINT tSEMI
-    | tINT tID tASSIGN tID tSEMI
+fun_call_params : /* empty */ | expression | fun_call_params tCOMMA expression ;
+
+if_instruction : tIF tLPAR expression tRPAR fun_body
+    | tIF tLPAR expression tRPAR fun_body tELSE if_instruction
+    | tIF tLPAR expression tRPAR fun_body tELSE fun_body
     ;
 
-// Declaraciones 'If' de una línea ??
-If : tIF tLPAR Expression tRPAR tLBRACE Code tRBRACE BodyIf
+while_instruction : tWHILE tLPAR expression tRPAR fun_body
     ;
 
-BodyIf :
-    | tELSE tLBRACE Code tRBRACE
-    | tELSE If
-    ;
+return_instruction : tRETURN expression tSEMI;
 
-While : tWHILE tLPAR Expression tRPAR Body
-    ;
+print_instruction : tPRINT tLPAR expression tRPAR tSEMI;
 
-Expression : tNB ExpSymbol tNB
-    | tNB ExpSymbol tID
-    | tID ExpSymbol tNB
-    
-    // preguntar sobre el ID en la expresión para verificar que se haya declarado anteriormente
-    | tID ExpSymbol tID
-    ;
-
-ExpSymbol : tNE | tEQ | tGE | tLE | tAND | tOR | tLT | tGT
-    ;
 %%
 
 void yyerror(char *s) { fprintf(stderr, "%s\n", s); }
