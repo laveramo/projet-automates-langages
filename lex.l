@@ -37,7 +37,7 @@
  "="      { return tASSIGN; }
 "&&"      { return tAND; }
 "||"      { return tOR; }
-"!"       { printf("tNOT\n"); }
+"!"       { return tNOT; }
 "{"       { return tLBRACE; }
 "}"       { return tRBRACE; }
 "("       { return tLPAR; }

@@ -13,7 +13,7 @@ void yyerror(char *s);
 }
 
 /* Definición de tokens */
-%token tVOID tINT tID tLPAR tRPAR tCOMMA tLBRACE tRBRACE tIF tELSE tSEMI tAND tOR tWHILE tRETURN tPRINT
+%token tVOID tINT tID tLPAR tRPAR tCOMMA tLBRACE tRBRACE tIF tELSE tSEMI tAND tOR tWHILE tRETURN tPRINT tNOT
 %token <ival> tNB
 
 /* 'left' para que asocie de izquierda a derecha -> 2+3+4 = (2+3)+4 */
@@ -56,6 +56,7 @@ instruction : assign_instruction
 item : tID | tNB ;
 
 expression : item
+    | tNOT expression
     | expression tADD expression
     | expression tSUB expression
     | expression tMUL expression
