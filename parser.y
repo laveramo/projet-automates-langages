@@ -70,7 +70,7 @@ expression : item
     | item tEQ item
     | item tAND item
     | item tOR item
-    | tNOT expression
+    | tNOT tLPAR expression tRPAR
     ;
 
 assign_instruction : tID tASSIGN expression tSEMI
