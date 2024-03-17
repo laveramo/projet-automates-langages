@@ -2,7 +2,7 @@
 
 ## Description
 
-Cet projet permet de vérifier que le prgramme écrit par l'utilisateur respecte bien les règles de syntaxe du langage C.
+Cet projet permet de vérifier que le programme écrit par l'utilisateur respecte bien les règles de syntaxe du langage C.
 
 L'analyseur est divisé en deux parties :
 
