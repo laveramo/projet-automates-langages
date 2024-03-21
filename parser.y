@@ -15,11 +15,13 @@ typedef struct symbol {
 
 int cont = 0;
 
-struct symbol tab_symbol[cont];
+struct symbol tab_symbol[255];
 
+// Busca un símbolo en la tabla de símbolos
 bool search_symbol(char * name) {
-    printf("%lu", sizeof(tab_symbol));
-    for(int i = 0; i < 2; i ++) {
+    int i;
+    for(i = cont-1; i >= 0; i --) {
+        // Compara si el nombre del símbolo es igual al nombre que se busca en la tabla de símbolos (strcmp devuelve 0 si son iguales)
         if(strcmp(tab_symbol[i].id_name, name)==0) {
             return true;
         }
@@ -27,13 +29,19 @@ bool search_symbol(char * name) {
     return false;
 }
 
-// añade símbolo a la tabla
+// Añade símbolo a la tabla de símbolos
 void add_symbol(char * name) {
-    // el arreglo no esta vacio
-    if(!search_symbol(name)) {
-        tab_symbol[0].id_name=name;
-        printf("%s\n", tab_symbol[0].id_name);
+printf("Name: %s\n", name);
+    if(cont > 0) {
+        if(!search_symbol(name)) {
+            tab_symbol[cont].id_name = name;
+            printf("Stored '%s'\n", tab_symbol[cont].id_name);
+        }
+    } else {
+        tab_symbol[0].id_name = name;
+        printf("Stored '%s'\n", tab_symbol[0].id_name);
     }
+    cont++;
 }
 
 
@@ -57,6 +65,7 @@ void add_symbol(char * name) {
 
 /* Inicio del programa */
 %start program
+
 %%
 
 program : fun | program fun ;
@@ -87,7 +96,8 @@ instruction : assign_instruction
     | print_instruction
     ;
 
-item : tID | tNB ;
+item : tID { if(!search_symbol($1)) printf("Variable '%s' not declared.\n", $1); exit(1); }
+| tNB ;
 
 expression : item
     | expression tADD expression
@@ -108,11 +118,11 @@ expression : item
     ;
 
 assign_instruction : tID tASSIGN expression tSEMI
-    | tID tASSIGN fun_call tSEMI
+    | tID tASSIGN fun_call tSEMI 
 ;
 
 declaration_options : tID { add_symbol($1); }
-    | tID tCOMMA declaration_options
+    | tID tCOMMA declaration_options { add_symbol($1); }
     ;
 
 declaration_instruction : tINT declaration_options tSEMI
