@@ -2,18 +2,52 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 int yylex(void);
 void yyerror(char *s);
+
+typedef struct symbol {
+    char * id_name;
+    // int val;
+    // char type;
+};
+
+int cont = 0;
+
+struct symbol tab_symbol[cont];
+
+bool search_symbol(char * name) {
+    printf("%lu", sizeof(tab_symbol));
+    for(int i = 0; i < 2; i ++) {
+        if(strcmp(tab_symbol[i].id_name, name)==0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// añade símbolo a la tabla
+void add_symbol(char * name) {
+    // el arreglo no esta vacio
+    if(!search_symbol(name)) {
+        tab_symbol[0].id_name=name;
+        printf("%s\n", tab_symbol[0].id_name);
+    }
+}
+
+
 %}
 
 
 %union {
     int ival;
+    char * tname;
 }
 
 /* Definición de tokens */
-%token tVOID tINT tID tLPAR tRPAR tCOMMA tLBRACE tRBRACE tIF tELSE tSEMI tAND tOR tWHILE tRETURN tPRINT tNOT
+%token tVOID tINT tLPAR tRPAR tCOMMA tLBRACE tRBRACE tIF tELSE tSEMI tAND tOR tWHILE tRETURN tPRINT tNOT
+%token <tname> tID
 %token <ival> tNB
 
 /* 'left' para que asocie de izquierda a derecha -> 2+3+4 = (2+3)+4 */
@@ -77,7 +111,7 @@ assign_instruction : tID tASSIGN expression tSEMI
     | tID tASSIGN fun_call tSEMI
 ;
 
-declaration_options : tID
+declaration_options : tID { add_symbol($1); }
     | tID tCOMMA declaration_options
     ;
 
@@ -105,6 +139,7 @@ print_instruction : tPRINT tLPAR expression tRPAR tSEMI;
 %%
 
 void yyerror(char *s) { fprintf(stderr, "%s\n", s); }
+
 int main(void) {
   printf("Parser\n"); // yydebug=1;
   yyparse();
