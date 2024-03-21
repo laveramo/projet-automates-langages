@@ -50,7 +50,7 @@
 
 
 
-[_a-zA-Z][a-zA-Z0-9_]*      { return tID; }
+[_a-zA-Z][a-zA-Z0-9_]*      { yylval.tname = strdup(yytext); return tID; }
 [0-9]+             { yylval.ival = atoi(yytext);
                     return tNB; } 
 0x[0-9A-Fa-f]+     { yylval.ival = (int) strtol(yytext, NULL, 16);
