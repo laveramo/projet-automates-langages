@@ -51,11 +51,9 @@
 
 
 [_a-zA-Z][a-zA-Z0-9_]*      { return tID; }
-[0-9]+             { /* long int number = strtol(yytext, NULL, 0);
-                    return("tNB: '%ld[0x%lx]'\n", number, number); */
+[0-9]+             { yylval.ival = atoi(yytext);
                     return tNB; } 
-0x[0-9A-Fa-f]+     { /*long int number = strtol(yytext, NULL, 0);
-                    return("tNB: '%ld[0x%lx]'\n", number, number);*/
+0x[0-9A-Fa-f]+     { yylval.ival = (int) strtol(yytext, NULL, 16);
                     return tNB;  } 
 
 
