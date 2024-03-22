@@ -31,15 +31,12 @@ bool search_symbol(char * name) {
 
 // Añade símbolo a la tabla de símbolos
 void add_symbol(char * name) {
-printf("Name: %s\n", name);
     if(cont > 0) {
         if(!search_symbol(name)) {
             tab_symbol[cont].id_name = name;
-            printf("Stored '%s'\n", tab_symbol[cont].id_name);
         }
     } else {
         tab_symbol[0].id_name = name;
-        printf("Stored '%s'\n", tab_symbol[0].id_name);
     }
     cont++;
 }
@@ -76,7 +73,7 @@ void_fun : tVOID tID tLPAR params tRPAR fun_body;
 
 int_fun : tINT tID tLPAR params tRPAR fun_body;
 
-fun_body : tLBRACE instructions tRBRACE 
+fun_body : tLBRACE instructions tRBRACE
     | tLBRACE tRBRACE 
     | tLBRACE instructions return_instruction tRBRACE
     ;
@@ -96,7 +93,7 @@ instruction : assign_instruction
     | print_instruction
     ;
 
-item : tID { if(!search_symbol($1)) printf("Variable '%s' not declared.\n", $1); exit(1); }
+item : tID { if(!search_symbol($1)) printf("Variable '%s' not declared.\n", $1); }
 | tNB ;
 
 expression : item
@@ -118,7 +115,7 @@ expression : item
     ;
 
 assign_instruction : tID tASSIGN expression tSEMI
-    | tID tASSIGN fun_call tSEMI 
+    | tID tASSIGN fun_call tSEMI
 ;
 
 declaration_options : tID { add_symbol($1); }
