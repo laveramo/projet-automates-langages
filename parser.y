@@ -7,9 +7,9 @@
 int yylex(void);
 void yyerror(char *s);
 
-typedef struct symbol {
-    char * id_name;
-    // int val;
+struct symbol {
+    char id_name[128];
+    // int * scope;
     // char type;
 };
 
@@ -18,9 +18,8 @@ int cont = 0;
 struct symbol tab_symbol[255];
 
 // Busca un símbolo en la tabla de símbolos
-bool search_symbol(char * name) {
-    int i;
-    for(i = cont-1; i >= 0; i --) {
+bool search_symbol(char name[]) {
+    for(int i = cont-1; i >= 0; i --) {
         // Compara si el nombre del símbolo es igual al nombre que se busca en la tabla de símbolos (strcmp devuelve 0 si son iguales)
         if(strcmp(tab_symbol[i].id_name, name)==0) {
             return true;
@@ -30,17 +29,21 @@ bool search_symbol(char * name) {
 }
 
 // Añade símbolo a la tabla de símbolos
-void add_symbol(char * name) {
+void add_symbol(char name[]) {
     if(cont > 0) {
         if(!search_symbol(name)) {
-            tab_symbol[cont].id_name = name;
+            if(strcmp(name, "tmp")==0) {
+                char tmpname[12];
+                snprintf(tmpname, 12, "tmp%d", cont);
+                strcpy(tab_symbol[cont].id_name, tmpname);
+            }
+            else strcpy(tab_symbol[cont].id_name, name);
         }
     } else {
-        tab_symbol[0].id_name = name;
+        strcpy(tab_symbol[0].id_name, name);
     }
     cont++;
 }
-
 
 %}
 
@@ -94,7 +97,7 @@ instruction : assign_instruction
     ;
 
 item : tID { if(!search_symbol($1)) printf("Variable '%s' not declared.\n", $1); }
-| tNB ;
+| tNB {add_symbol("tmp");}
 
 expression : item
     | expression tADD expression
