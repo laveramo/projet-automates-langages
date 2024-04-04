@@ -5,11 +5,12 @@ BIN=parser
 CC=gcc
 CFLAGS=-Wall -g
 
-OBJ=y.tab.o lex.yy.o
+OBJ=y.tab.o lex.yy.o symbol_table.o instruction_table.o
 
 all: $(BIN)
 
-%.o: %.c
+
+%.o: %.c symbol_table.h instruction_table.h
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
 
 y.tab.c: $(GRM)

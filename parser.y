@@ -1,5 +1,6 @@
 %{
-#include "symbol_table.c"
+#include "symbol_table.h"
+#include "instruction_table.h"
 
 int yylex(void);
 void yyerror(char *s);
@@ -56,7 +57,8 @@ instruction : assign_instruction
     ;
 
 item : tID { if(!search_symbol($1)) printf("Variable '%s' not declared.\n", $1); }
-| tNB {add_symbol("tmp");}
+| tNB {add_symbol("tmp", $1);}
+;
 
 expression : item
     | expression tADD expression
@@ -80,8 +82,8 @@ assign_instruction : tID tASSIGN expression tSEMI
     | tID tASSIGN fun_call tSEMI
 ;
 
-declaration_options : tID { add_symbol($1); }
-    | tID tCOMMA declaration_options { add_symbol($1); }
+declaration_options : tID { add_symbol($1, 0); }
+    | tID tCOMMA declaration_options { add_symbol($1, 0); }
     ;
 
 declaration_instruction : tINT declaration_options tSEMI
@@ -110,7 +112,10 @@ print_instruction : tPRINT tLPAR expression tRPAR tSEMI;
 void yyerror(char *s) { fprintf(stderr, "%s\n", s); }
 
 int main(void) {
-  printf("Parser\n"); // yydebug=1;
-  yyparse();
-  return 0;
+    printf("Parser\n"); // yydebug=1;
+    yyparse();
+    print_tab();
+    printf("\n");
+    print_inst_tab();
+    return 0;
 }
