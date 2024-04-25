@@ -13,6 +13,7 @@ void add_instruction(char inst_name[], int op1, int op2, int op3) {
 }
 
 void print_inst_tab() {
+    printf("\t\tASM\t\t\t\n");
     for(int i = 0; i < inst_cont; i ++) {
         printf("%s\t", tab_instruct[i].ins_name);
         printf("%d\t", tab_instruct[i].op1);
