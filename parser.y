@@ -78,17 +78,17 @@ expression : item
     | tNOT tLPAR expression tRPAR
     ;
 
-assign_instruction : tID tASSIGN expression tSEMI
-    | tID tASSIGN fun_call tSEMI
+assign_instruction : tID tASSIGN expression tSEMI {copy_last_temp($1);}
+    | tID tASSIGN fun_call tSEMI 
 ;
-
-declaration_options : tID { add_symbol($1, 0); }
-    | tID tCOMMA declaration_options { add_symbol($1, 0); }
-    ;
 
 declaration_instruction : tINT declaration_options tSEMI
     | tINT declaration_options tASSIGN expression tSEMI
     | tINT declaration_options tASSIGN fun_call tSEMI
+    ;
+
+declaration_options : tID { add_symbol($1, 0); }
+    | tID tCOMMA declaration_options { add_symbol($1, 0); }
     ;
 
 fun_call : tID tLPAR fun_call_params tRPAR ;

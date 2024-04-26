@@ -16,6 +16,16 @@ bool search_symbol(char name[]) {
     return false;
 }
 
+int get_index(char name[]) {
+    for(int i = cont-1; i >= 0; i --) {
+        // Compara si el nombre del símbolo es igual al nombre que se busca en la tabla de símbolos (strcmp devuelve 0 si son iguales)
+        if(strcmp(tab_symbol[i].id_name, name)==0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 void add_symbol(char name[], int val) {
     if(cont > 0) {
         if(!search_symbol(name)) {
@@ -33,11 +43,26 @@ void add_symbol(char name[], int val) {
         tab_symbol[0].var_scope = scope;
     }
     cont++;
+    print_tab();
+    print_inst_tab();
+}
+
+
+void copy_last_temp(char name[]){
+    if(search_symbol(name)) {
+        add_instruction("COP",get_index(name),cont-1,0);
+        cont--;
+        print_tab();
+        print_inst_tab();
+    }
+    
+    
 }
 
 int set_scope(int scope) {return 1;}
 
 void print_tab() {
+    printf("symbol table\n");
     for(int i = 0; i < cont; i ++) {
         printf("%s\n", tab_symbol[i].id_name);
     } 

@@ -18,6 +18,9 @@ bool search_symbol(char name[]);
 // Añade símbolo a la tabla de símbolos
 void add_symbol(char name[], int val);
 
+// copy the last temp variable to corresponding variable (name) and deletes temp variable
+void  copy_last_temp(char name[]);
+
 int set_scope(int scope);
 
 void print_tab();
