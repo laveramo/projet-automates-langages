@@ -27,6 +27,7 @@ int get_index(char name[]) {
 }
 
 void add_symbol(char name[], int val) {
+    print_tab();
     if(cont > 0) {
         if(!search_symbol(name)) {
             if(strcmp(name, "tmp")==0) {
@@ -43,21 +44,42 @@ void add_symbol(char name[], int val) {
         tab_symbol[0].var_scope = scope;
     }
     cont++;
-    print_tab();
     print_inst_tab();
 }
 
+void copy_symbol(char name[]){
+    print_tab();
+    if(cont > 0) {
+        if(get_index(name) != -1) {
+            char tmpname[12];
+            snprintf(tmpname, 12, "tmp%d", cont);
+            strcpy(tab_symbol[cont].id_name, tmpname);
+            cont++;
+            add_instruction("COP", cont-1, get_index(name), 0);   
+        }
+    }
+
+    print_inst_tab();
+}
 
 void copy_last_temp(char name[]){
+    print_tab();
     if(search_symbol(name)) {
         add_instruction("COP",get_index(name),cont-1,0);
         cont--;
-        print_tab();
         print_inst_tab();
     }
     
     
 }
+
+void operation(char op[]){
+    print_tab();
+    add_instruction(op,cont-2,cont-2,cont-1);
+    cont--;
+    print_inst_tab();
+}
+
 
 int set_scope(int scope) {return 1;}
 

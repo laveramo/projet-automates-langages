@@ -56,15 +56,15 @@ instruction : assign_instruction
     | print_instruction
     ;
 
-item : tID { if(!search_symbol($1)) printf("Variable '%s' not declared.\n", $1); }
+item : tID { if(!search_symbol($1)){printf("Variable '%s' not declared.\n", $1);} else{copy_symbol($1);} }
 | tNB {add_symbol("tmp", $1);}
 ;
 
 expression : item
-    | expression tADD expression
-    | expression tSUB expression
-    | expression tMUL expression
-    | expression tDIV expression
+    | expression tADD expression {operation("ADD");}
+    | expression tSUB expression {operation("SUB");}
+    | expression tMUL expression {operation("MUL");}
+    | expression tDIV expression {operation("DIV");}
     | tLPAR expression tRPAR
     | item tLT item
     | item tGT item
@@ -88,7 +88,7 @@ declaration_instruction : tINT declaration_options tSEMI
     ;
 
 declaration_options : tID { add_symbol($1, 0); }
-    | tID tCOMMA declaration_options { add_symbol($1, 0); }
+    | declaration_options tCOMMA tID   { add_symbol($3, 0); }
     ;
 
 fun_call : tID tLPAR fun_call_params tRPAR ;
