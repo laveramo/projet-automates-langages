@@ -31,6 +31,7 @@ void add_tmp_symbol(char name[], char val[]) {
     char tmpname[12];
     snprintf(tmpname, 12, "tmp%d", cont);
 
+    // Si el valor es NULL, significa que se está copiando el valor de una variable a un símbolo temporal
     if(val == NULL) {
         printf("val is NULL\t\t %s\t%d\n", name, var_index);
         if(is_valid_num(name)) {
