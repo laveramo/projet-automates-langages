@@ -54,23 +54,18 @@ void copy_to_last_tmp(char name[]) {
         add_instruction("COP", var_index, cont-1, 0);
         cont--;
     }
+    print_inst_tab();
 }
+
+void operation(char op[]){
+    print_tab();
+    add_instruction(op,cont-2,cont-2,cont-1);
+    cont--;
+    print_inst_tab();
+}
+
 
 int set_scope(int scope) {return 1;}
-
-void add() {
-    // print_tab();
-    add_instruction("ADD", cont-2, cont-2, cont-1);
-    cont--;
-    // print_inst_tab();
-}
-
-void multiply() {
-    // print_tab();
-    add_instruction("MUL", cont-2, cont-2, cont-1);
-    cont--;
-    // print_inst_tab();
-}
 
 void print_tab() {
     printf("\t\tPDA Stack\t\t\t\n");

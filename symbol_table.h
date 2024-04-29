@@ -51,6 +51,13 @@ void copy_to_tmp(char name[]);
 */
 void copy_to_last_tmp(char name[]);
 
+/*
+* @fn operation
+* @brief Detecta la operación a realizar y la guarda en la tabla de instrucciones
+* @param op Operación a realizar
+*/
+void operation(char op[]);
+
 int set_scope(int scope);
 
 /*

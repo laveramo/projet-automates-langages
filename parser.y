@@ -63,19 +63,14 @@ identifier : tID { $$ = $1; } ;
 number : tNB { $$ = $1; } ;
 
 item : identifier { copy_to_tmp($1); }
-| number {
-    // char * numStr = malloc(12 * sizeof(char));
-    // sprintf(numStr, "%d", $1);
-    // $$ = numStr;
-    add_symbol("tmp", $1);
-}
-;
+    | number { add_symbol("tmp", $1); }
+    ;
 
 expression : item
-    | expression tADD expression { add(); }
-    | expression tMUL expression { multiply(); }
-    | expression tDIV expression { printf("--- DIV %s %s\n", $1, $3); }
-    | expression tSUB expression { printf("--- SUB %s %s\n", $1, $3); }
+    | expression tADD expression { operation("ADD"); }
+    | expression tMUL expression { operation("MUL"); }
+    | expression tDIV expression { operation("DIV"); }
+    | expression tSUB expression { operation("SUB"); }
     ;
 
 assert : item tLT item
