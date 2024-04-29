@@ -18,49 +18,58 @@ int search_symbol(char name[]) {
 
 void add_symbol(char name[], int val) {
     if(search_symbol(name) == -1) {
-        strcpy(tab_symbol[cont].id_name, name);
+        if(strcmp(name, "tmp") == 0) {
+            set_tmp_symbol(name);
+            add_instruction("AFC", cont, val, 0);
+        }
+        else strcpy(tab_symbol[cont].id_name, name);
         tab_symbol[cont].var_scope = scope;
-    
-        cont++;
-    }
-    
+    } 
+    cont++;
 }
 
-void add_tmp_symbol(char name[], char val[]) {
-    int var_index = search_symbol(name);
-    char tmpname[12];
+char * set_tmp_symbol(char name[]) {
+    char * tmpname = malloc(12 * sizeof(char));
     snprintf(tmpname, 12, "tmp%d", cont);
+    strcpy(tab_symbol[cont].id_name, tmpname);
+    return tmpname;
+}
 
-    // Si el valor es NULL, significa que se está copiando el valor de una variable a un símbolo temporal
-    if(val == NULL) {
-        printf("val is NULL\t\t %s\t%d\n", name, var_index);
-        if(is_valid_num(name)) {
-            add_instruction("AFC", cont, atoi(name), 0);
-            add_symbol(tmpname, atoi(name));
-        } else {
-            add_instruction("COP", cont, var_index, 0);
-            add_symbol(tmpname, tab_symbol[var_index].value);
-        }
+void copy_to_tmp(char name[]) {
+    int var_index = search_symbol(name);
+
+    if(var_index != -1) {
+        set_tmp_symbol(name);
+        add_instruction("COP", cont, var_index, 0);
+        cont++;
     } else {
-        add_instruction("AFC", cont, atoi(val), 0);
-        add_symbol(tmpname, atoi(val));
-        // Decrementa el contador de la tabla de símbolos para 'eliminar' el símbolo temporal que se creó y copiar el valor al símbolo original
-        cont--; 
-        tab_symbol[var_index].value = atoi(val);
-        add_instruction("COP", var_index, cont, 0);
+        printf("Error: Variable %s no declarada\n", name);
     }
-    
+}
+
+void copy_to_last_tmp(char name[]) {
+    int var_index = search_symbol(name);
+
+    if(var_index != -1) {
+        add_instruction("COP", var_index, cont-1, 0);
+        cont--;
+    }
 }
 
 int set_scope(int scope) {return 1;}
 
-bool is_valid_num(char num[]) {
-    for(int i = 0; i < strlen(num); i ++) {
-        if(!isdigit(num[i])) {
-            return false;
-        }
-    }
-    return true;
+void add() {
+    // print_tab();
+    add_instruction("ADD", cont-2, cont-2, cont-1);
+    cont--;
+    // print_inst_tab();
+}
+
+void multiply() {
+    // print_tab();
+    add_instruction("MUL", cont-2, cont-2, cont-1);
+    cont--;
+    // print_inst_tab();
 }
 
 void print_tab() {

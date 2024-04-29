@@ -62,19 +62,20 @@ instruction : assign_instruction
 identifier : tID { $$ = $1; } ;
 number : tNB { $$ = $1; } ;
 
-item : identifier
+item : identifier { copy_to_tmp($1); }
 | number {
-    char * numStr = malloc(12 * sizeof(char));
-    sprintf(numStr, "%d", $1);
-    $$ = numStr;
+    // char * numStr = malloc(12 * sizeof(char));
+    // sprintf(numStr, "%d", $1);
+    // $$ = numStr;
+    add_symbol("tmp", $1);
 }
 ;
 
 expression : item
-    | expression tADD expression { printf("--- ADD %s %s\n", $1, $3); add_tmp_symbol($1, NULL);  }
-    | expression tMUL expression {  printf("--- MUL %s %s\n", $1, $3); add_tmp_symbol($1, NULL);}
-    | expression tDIV expression { printf("--- DIV %s %s\n", $1, $3); add_tmp_symbol($1, NULL);}
-    | expression tSUB expression { printf("--- SUB %s %s\n", $1, $3); add_tmp_symbol($1, NULL); }
+    | expression tADD expression { add(); }
+    | expression tMUL expression { multiply(); }
+    | expression tDIV expression { printf("--- DIV %s %s\n", $1, $3); }
+    | expression tSUB expression { printf("--- SUB %s %s\n", $1, $3); }
     ;
 
 assert : item tLT item
@@ -89,7 +90,7 @@ assert : item tLT item
     | tNOT item
 ;
 
-assign_instruction : identifier tASSIGN expression tSEMI { if(is_valid_num($3)) { add_tmp_symbol($1, $3); } printf("expression: %s\t%s\n", $1, $3); } // { add_tmp_symbol($1, $3); }
+assign_instruction : identifier tASSIGN expression tSEMI { copy_to_last_tmp($1); }
     | identifier tASSIGN fun_call tSEMI
 ;
 

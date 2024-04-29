@@ -31,22 +31,27 @@ int search_symbol(char name[]);
 void add_symbol(char name[], int val);
 
 /*
-* @fn add_tmp_symbol
-* @brief Añade un símbolo temporal a la tabla de símbolos
+* @fn set_tmp_symbol
+* @brief Genera el nombre de un símbolo temporal
 * @param name Nombre del símbolo
-* @param val Valor del símbolo
 */
-void add_tmp_symbol(char name[], char val[]);
-
-int set_scope(int scope);
+char * set_tmp_symbol(char name[]);
 
 /*
-* @fn is_valid_num
-* @brief Comprueba si un número es válido
-* @param num Número a comprobar
-* @return true si el número es válido, false en caso contrario
+* @fn copy_to_tmp
+* @brief Copia un símbolo ya existente a un símbolo temporal
+* @param name Nombre del símbolo
 */
-bool is_valid_num(char num[]);
+void copy_to_tmp(char name[]);
+
+/*
+* @fn copy_to_last_tmp
+* @brief Copia un símbolo ya existente al último símbolo temporal creado
+* @param name Nombre del símbolo
+*/
+void copy_to_last_tmp(char name[]);
+
+int set_scope(int scope);
 
 /*
 * @fn print_tab
