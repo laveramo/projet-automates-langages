@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../Microprocesseur.srcs/sources_1/new/BancRegistres.vhd" \
+"../../../../Microprocesseur.srcs/sim_1/new/test_BancRegistres.vhd" \
+
+# Do not sort compile order
+nosort
