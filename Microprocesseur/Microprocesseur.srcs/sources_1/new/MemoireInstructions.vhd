@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 05/17/2024 08:41:03 AM
+-- Create Date: 05/24/2024 03:30:17 PM
 -- Design Name: 
--- Module Name: MemoireDonnees - Behavioral
+-- Module Name: MemoireInstructions - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -32,27 +32,19 @@ use IEEE.std_logic_unsigned.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity MemoireDonnees is
+entity MemoireInstructions is
     Port ( ADRESSE : in STD_LOGIC_VECTOR (7 downto 0 );
-           D_IN : in STD_LOGIC_VECTOR (7 downto 0);
-           RW : in STD_LOGIC;
-           RST : in STD_LOGIC;
            CLK : in STD_LOGIC;
-           D_OUT : out STD_LOGIC_VECTOR (7 downto 0));
-end MemoireDonnees;
+           D_OUT : out STD_LOGIC_VECTOR (31 downto 0));
+end MemoireInstructions;
 
-architecture Behavioral of MemoireDonnees is
-    type mem_array is array (0 to 255) of std_logic_vector(7 downto 0);
+architecture Behavioral of MemoireInstructions is
+    type mem_array is array (0 to 1023) of std_logic_vector(31 downto 0);
     signal memory : mem_array := (others => (others => '0'));
 begin
     process (clk)
     begin
         if rising_edge(clk) then
-            if rst = '0' then
-                memory <= (others => (others => '0'));
-            elsif rw = '0' then
-                memory(conv_integer(ADRESSE)) <= D_IN;
-            end if;
             D_OUT <= memory(conv_integer(ADRESSE));
         end if;
     end process;
