@@ -24,7 +24,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-entity Processor is
+entity Pipeline is
     Port (
         clk : in std_logic;
         rst : in std_logic;
@@ -49,11 +49,9 @@ entity Processor is
         data_out : in std_logic_vector(7 downto 0);
         data_rw : out std_logic -- 1 pour lecture, 0 pour écriture
     );
-end Processor;
+end Pipeline;
 
-architecture Behavioral of Processor is
-    -- Déclaration des signaux intermédiaires
-    signal pc : std_logic_vector(7 downto 0) := (others => '0'); -- Compteur de programme
+architecture Behavioral of Pipeline is
 
     -- Registres de pipeline
     type pipeline_stage is record
@@ -69,12 +67,8 @@ architecture Behavioral of Processor is
     signal EX_MEM : pipeline_stage;
     signal MEM_RE : pipeline_stage;
 
-
-    -- Signaux pour l'exécution des instructions
-    signal alu_result : std_logic_vector(7 downto 0);
-    signal mem_data : std_logic_vector(7 downto 0);
-
 begin
+    
     -- Etage 1: Decode (LI/DI)
     process(clk, rst)
     begin
@@ -85,6 +79,8 @@ begin
             LI_DI.A <= instr_data(23 downto 16);
             LI_DI.B <= instr_data(15 downto 8);
             LI_DI.C <= instr_data(7 downto 0);
+            reg_ADD_A <= LI_DI.B;
+            reg_ADD_B <= LI_DI.C;
         end if;
     end process;
 
@@ -94,36 +90,40 @@ begin
         if rst = '0' then
             DI_EX <= (others => (others => '0'));
         elsif rising_edge(clk) then
-            --EX_MEM.OP <= DI_EX.OP;
-            --EX_MEM.A <= DI_EX.A;
+            DI_EX.OP <= LI_DI.OP;
+            DI_EX.A <= LI_DI.A;
 
             case LI_DI.OP is
-                when "00000001" => -- ADD
-                    --alu_result <= registers(conv_integer(DI_EX.B)) + registers(conv_integer(DI_EX.C));
-                when "00000010" => -- MUL
-                    --alu_result <= registers(conv_integer(DI_EX.B)) * registers(conv_integer(DI_EX.C));
-                when "00000011" => -- SOU
-                    --alu_result <= registers(conv_integer(DI_EX.B)) - registers(conv_integer(DI_EX.C));
-                when "00000100" => -- DIV
-                    --alu_result <= registers(conv_integer(DI_EX.B)) / registers(conv_integer(DI_EX.C));
-                when "00000101" => -- COP
-                    --alu_result <= registers(conv_integer(DI_EX.B));
+                when "00000001" => --ADD
+                    DI_EX.B <= reg_QA;
+                    DI_EX.C <= reg_QB;
+                    alu_OP <= "000";
+                 when "00000010" => --MUL
+                    DI_EX.B <= reg_QA;
+                    DI_EX.C <= reg_QB;
+                    alu_OP <= "010";
+                 when "00000011" => --SOU
+                    DI_EX.B <= reg_QA;
+                    DI_EX.C <= reg_QB;
+                    alu_OP <= "001";
+                 when "00000100" => --DIV
+                    DI_EX.B <= reg_QA;
+                    DI_EX.C <= reg_QB;
+                    --alu_OP <= "000";
+                  when "00000101" => -- COP
+                    DI_EX.B <= reg_QA;
+                    DI_EX.C <= reg_QB;
                 when "00000110" => -- AFC
-                    DI_EX.OP <= LI_DI.OP;
-                    DI_EX.A <= LI_DI.A;
                     DI_EX.B <= LI_DI.B;
                 when "00000111" => -- LOAD
-                    --data_addr <= registers(conv_integer(DI_EX.B));
-                    data_rw <= '1';
+                    DI_EX.B <= LI_DI.B;
                 when "00001000" => -- STORE
-                    --data_addr <= DI_EX.imm_value;
-                    --data_in <= registers(conv_integer(DI_EX.B));
-                    --data_rw <= '0';
+                    DI_EX.B <= LI_DI.B;
                 when others =>
-                    alu_result <= (others => '0');
+                    null;
             end case;
-
-            --EX_MEM.alu_result <= alu_result;
+            alu_Num1 <= DI_EX.B;
+            alu_Num2 <= DI_EX.C;
         end if;
     end process;
 
@@ -133,17 +133,25 @@ begin
         if rst = '0' then
             EX_MEM <= (others => (others => '0'));
         elsif rising_edge(clk) then
-            --MEM_RE.instr <= EX_MEM.instr;
-            --MEM_RE.OP <= EX_MEM.OP;
-            --MEM_RE.A <= EX_MEM.A;
-
+            EX_MEM.OP <= DI_EX.OP;
+            EX_MEM.A <= DI_EX.A;
+        
             case DI_EX.OP is
-                when "00000110" => -- AFC
-                    EX_MEM.OP <= DI_EX.OP;
-                    EX_MEM.A <= DI_EX.A;
+                when "00000001" | "00000010" | "00000011" | "00000100" => -- ADD.MUL.SOU.DIV
+                    EX_MEM.B <= alu_Res;
+                when "00000101" | "00000110" => -- COP,AFC
                     EX_MEM.B <= DI_EX.B;
+                when "00000111" => --LOAD
+                    EX_MEM.B <= DI_EX.B;
+                    data_addr <= EX_MEM.B;
+                    data_rw <= '1';
+                when "00001000" => -- STORE
+                    EX_MEM.B <= DI_EX.B;
+                    data_addr <= EX_MEM.A;
+                    data_in <= EX_MEM.B;
+                    data_rw <= '0';  
                 when others =>
-                    --EX_MEM.alu_result <= EX_MEM.alu_result;
+                    null;
             end case;
         end if;
     end process;
@@ -154,13 +162,13 @@ begin
         if rst = '0' then
             MEM_RE <= (others => (others => '0'));
         elsif rising_edge(clk) then
+        MEM_RE.OP <= EX_MEM.OP;
+        MEM_RE.A <= EX_MEM.A;
             case EX_MEM.OP is
-                when "00000110"  => -- AFC
-                    MEM_RE.OP <= EX_MEM.OP;
-                    MEM_RE.A <= EX_MEM.A;
-                    MEM_RE.B <= EX_MEM.B;        
+                when "00000111" | "00001000"  => --LOAD,STORE
+                    MEM_RE.B <= data_out;      
                 when others =>
-                    null;
+                    MEM_RE.B <= EX_MEM.B; 
             end case;
         end if;
     end process;
@@ -172,12 +180,10 @@ begin
             MEM_RE <= (others => (others => '0'));
         elsif rising_edge(clk) then
             case MEM_RE.OP is
-                when "00000110"  => -- AFC
-                    reg_W <= '1';   -- Signal d'écriture
-                    reg_ADD_W <= MEM_RE.A(3 downto 0) ; -- Adresse d'écriture
-                    reg_DATA <= MEM_RE.B;    -- Données à écrire
-                when others =>
-                    null;
+                when "00000001" | "00000010" | "00000011" | "00000100" | "00000101" | "00000110" | "00000111" => -- ALL EXCEPT STORE
+                    reg_DATA <= MEM_RE.B;
+                    reg_ADD_W <= MEM_RE.A;
+                    reg_W <= '1';
             end case;
         end if;
     end process;
