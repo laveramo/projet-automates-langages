@@ -42,6 +42,9 @@ architecture Behavioral of MemoireInstructions is
     type mem_array is array (0 to 1023) of std_logic_vector(31 downto 0);
     signal memory : mem_array := (others => (others => '0'));
 begin
+    memory(1) <= "00000000000000000000000000000111";
+    memory(2) <= "00000000000000000000000000001111";
+    memory(3) <= "00000000000000000000000000011111";
     process (clk)
     begin
         if rising_edge(clk) then
