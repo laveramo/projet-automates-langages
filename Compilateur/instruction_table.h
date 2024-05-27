@@ -24,6 +24,13 @@ struct instruction {
 void add_instruction(char inst_name[], int op1, int op2, int op3);
 
 /*
+* @fn get_inst_cont
+* @brief Devuelve el contador de instrucciones
+* @return Contador de instrucciones
+*/
+int get_inst_cont();
+
+/*
 * @fn print_inst_tab
 * @brief Imprime la tabla de instrucciones
 */
