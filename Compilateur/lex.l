@@ -57,8 +57,8 @@
                     return tNB;  } 
 
 
-\/\/[^\n]*|\/\*([^*]|\*+[^*/])*\*+\/ {/* pour ignorer les commentaires */ }
-[ \t\n]+      {/*let the whitespace pass*/}
+\/\/[^\n]*|\/\*([^*]|\*+[^*/])*\*+\/ {/* Ignore comments */ }
+[ \t\n]+      {/* Ket the whitespace pass */}
 . {printf( "tERROR\n"); }
 %%
 

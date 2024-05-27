@@ -16,6 +16,12 @@ int get_inst_cont() {
     return inst_cont;
 }
 
+void set_jump(int inst_index) {
+    if(strstr(tab_instruct[inst_index].ins_name, "JMPF") != NULL) {
+        tab_instruct[inst_index].op2 = get_inst_cont();
+    }
+}
+
 void print_inst_tab() {
     printf("\t\tASM\t\t\t\n");
     for(int i = 0; i < inst_cont; i ++) {

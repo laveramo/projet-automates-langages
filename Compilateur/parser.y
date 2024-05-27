@@ -13,16 +13,16 @@ void yyerror(char *s);
     char * tname;
 }
 
-/* Definición de tokens */
-%token tVOID tINT tRPAR tCOMMA tLBRACE tRBRACE tIF tELSE tSEMI tAND tOR tWHILE tRETURN tPRINT tNOT tADD tSUB tMUL tDIV tLT tGT tASSIGN tNE tGE tLE tEQ
-%token <tname> tID
-%token <ival> tNB tLPAR
+/* Token definition */
+%token tVOID tINT tCOMMA tLBRACE tRBRACE tELSE tSEMI tAND tOR tWHILE tRETURN tPRINT tNOT tADD tSUB tMUL tDIV tLT tGT tASSIGN tNE tGE tLE tEQ
+%token <tname> tID tIF
+%token <ival> tNB tLPAR tRPAR
 
-/* 'left' para que asocie de izquierda a derecha -> 2+3+4 = (2+3)+4 */
+/* 'left' so that it associates from left to right -> 2+3+4 = (2+3)+4 */
 %left tADD tSUB
 %left tMUL tDIV
 
-/* Inicio del programa */
+/* Start of the program */
 %start program
 
 %type <tname> identifier
@@ -99,7 +99,7 @@ assert : item_assert tLT item_assert
     | item_assert
 ;
 
-assign_instruction : identifier tASSIGN expression tSEMI { copy_to_last_tmp($1); }
+assign_instruction : identifier tASSIGN expression tSEMI { copy_to_last_tmp($1); printf("assign"); }
     | identifier tASSIGN fun_call tSEMI
 ;
 
@@ -116,12 +116,11 @@ fun_call : tID tLPAR fun_call_params tRPAR ;
 
 fun_call_params : /* empty */ | expression | fun_call_params tCOMMA expression ;
 
-if_instruction : tIF tLPAR assert tRPAR { $2 = get_inst_cont(); } fun_body else_body ;
+if_instruction : tIF tLPAR assert tRPAR { if_statement(); } fun_body { end_if(); } else_body ;
 
-else_body : /* empty */ | tELSE fun_body ;
+else_body : /* empty */ | tELSE fun_body { end_if_else(0); } ;
 
-while_instruction : tWHILE tLPAR assert tRPAR fun_body
-    ;
+while_instruction : tWHILE tLPAR assert tRPAR { while_statement(); } fun_body { end_while(); }  ;
 
 return_instruction : tRETURN expression tSEMI;
 
@@ -132,7 +131,7 @@ print_instruction : tPRINT tLPAR expression tRPAR tSEMI;
 void yyerror(char *s) { fprintf(stderr, "%s\n", s); }
 
 int main(void) {
-    printf("Parser\n"); // yydebug=1;
+    printf("==== PARSER ====\n"); // yydebug=1;
     yyparse();
     print_tab();
     printf("\n");
