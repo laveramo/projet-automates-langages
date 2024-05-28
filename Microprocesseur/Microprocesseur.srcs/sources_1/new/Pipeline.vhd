@@ -74,13 +74,21 @@ begin
     begin
         if rst = '0' then
             LI_DI <= (others => (others => '0'));
-        elsif rising_edge(clk) then
+        elsif clk='1' then
             LI_DI.OP <= instr_data(31 downto 24);
             LI_DI.A <= instr_data(23 downto 16);
             LI_DI.B <= instr_data(15 downto 8);
             LI_DI.C <= instr_data(7 downto 0);
-            reg_ADD_A <= LI_DI.B;
-            reg_ADD_B <= LI_DI.C;
+            
+            case instr_data(31 downto 24) is
+                when "00000001" | "00000010" | "00000011" | "00000100" => -- ALU operations
+                    reg_ADD_A <= instr_data(11 downto 8);
+                    reg_ADD_B <= instr_data(3 downto 0);
+                when "00000101" | "00001000" => -- COP, STORE
+                    reg_ADD_A <= instr_data(11 downto 8);
+                when others =>
+                    null;
+            end case;
         end if;
     end process;
 
@@ -89,7 +97,7 @@ begin
     begin
         if rst = '0' then
             DI_EX <= (others => (others => '0'));
-        elsif rising_edge(clk) then
+        elsif clk='1' then
             DI_EX.OP <= LI_DI.OP;
             DI_EX.A <= LI_DI.A;
 
@@ -98,14 +106,20 @@ begin
                     DI_EX.B <= reg_QA;
                     DI_EX.C <= reg_QB;
                     alu_OP <= "000";
+                    alu_Num1 <= reg_QA;
+                    alu_Num2 <= reg_QB;
                  when "00000010" => --MUL
                     DI_EX.B <= reg_QA;
                     DI_EX.C <= reg_QB;
                     alu_OP <= "010";
+                    alu_Num1 <= reg_QA;
+                    alu_Num2 <= reg_QB;
                  when "00000011" => --SOU
                     DI_EX.B <= reg_QA;
                     DI_EX.C <= reg_QB;
                     alu_OP <= "001";
+                    alu_Num1 <= reg_QA;
+                    alu_Num2 <= reg_QB;
                  when "00000100" => --DIV
                     DI_EX.B <= reg_QA;
                     DI_EX.C <= reg_QB;
@@ -122,8 +136,7 @@ begin
                 when others =>
                     null;
             end case;
-            alu_Num1 <= DI_EX.B;
-            alu_Num2 <= DI_EX.C;
+            
         end if;
     end process;
 
@@ -132,7 +145,7 @@ begin
     begin
         if rst = '0' then
             EX_MEM <= (others => (others => '0'));
-        elsif rising_edge(clk) then
+        elsif clk='1' then
             EX_MEM.OP <= DI_EX.OP;
             EX_MEM.A <= DI_EX.A;
         
@@ -143,12 +156,12 @@ begin
                     EX_MEM.B <= DI_EX.B;
                 when "00000111" => --LOAD
                     EX_MEM.B <= DI_EX.B;
-                    data_addr <= EX_MEM.B;
+                    data_addr <= DI_EX.B;
                     data_rw <= '1';
                 when "00001000" => -- STORE
                     EX_MEM.B <= DI_EX.B;
-                    data_addr <= EX_MEM.A;
-                    data_in <= EX_MEM.B;
+                    data_addr <= DI_EX.A;
+                    data_in <= DI_EX.B;
                     data_rw <= '0';  
                 when others =>
                     null;
@@ -161,10 +174,12 @@ begin
     begin
         if rst = '0' then
             MEM_RE <= (others => (others => '0'));
-        elsif rising_edge(clk) then
-        MEM_RE.OP <= EX_MEM.OP;
-        MEM_RE.A <= EX_MEM.A;
+        elsif clk='1' then
+            MEM_RE.OP <= EX_MEM.OP;
+            MEM_RE.A <= EX_MEM.A;
             case EX_MEM.OP is
+                when "00000001" | "00000010" | "00000011" | "00000100" | "00000101" | "00000110" => -- ADD.MUL.SOU.DIV
+                    MEM_RE.B <= EX_MEM.B;
                 when "00000111" | "00001000"  => --LOAD,STORE
                     MEM_RE.B <= data_out;      
                 when others =>
@@ -176,14 +191,14 @@ begin
     -- Etage 5: Write back
     process(clk, rst)
     begin
-        if rst = '0' then
-            MEM_RE <= (others => (others => '0'));
-        elsif rising_edge(clk) then
+        if clk='1' then
             case MEM_RE.OP is
                 when "00000001" | "00000010" | "00000011" | "00000100" | "00000101" | "00000110" | "00000111" => -- ALL EXCEPT STORE
                     reg_DATA <= MEM_RE.B;
-                    reg_ADD_W <= MEM_RE.A;
+                    reg_ADD_W <= MEM_RE.A(3 downto 0);
                     reg_W <= '1';
+                when others =>
+                    null;
             end case;
         end if;
     end process;
