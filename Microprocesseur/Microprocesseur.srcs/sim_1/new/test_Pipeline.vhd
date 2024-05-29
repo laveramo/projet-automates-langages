@@ -117,9 +117,9 @@ begin
     -- Clock process definitions
     CLK_process : process
     begin
-        clk <= '0';
-        wait for CLK_PERIOD/2;
         clk <= '1';
+        wait for CLK_PERIOD/2;
+        clk <= '0';
         wait for CLK_PERIOD/2;
     end process;
 

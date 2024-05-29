@@ -1,2 +1,2 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sim_1/new/test_Pipeline.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'test_Pipeline'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sim_1/new/test_Processeur.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'test_Processeur'
