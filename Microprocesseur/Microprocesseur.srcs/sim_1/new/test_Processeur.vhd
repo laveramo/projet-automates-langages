@@ -82,16 +82,20 @@ test_processeur: Processeur port map(
         test_ip <= "00000011";
         wait for CLK_PERIOD;
         
-        test_ip <= "00000000";
+        test_ip <= "00000100";
         wait for CLK_PERIOD;
        
-        test_ip <= "00000001";
+        test_ip <= "00000101";
         wait for CLK_PERIOD;
         
-        test_ip <= "00000010";
+        test_ip <= "00000110";
         wait for CLK_PERIOD;
         
-        test_ip <= "00000011";
+        test_ip <= "00000111";
+        wait for CLK_PERIOD;
+        
+        
+        test_ip <= "00001000";
          
     end process;
 end Behavioral;

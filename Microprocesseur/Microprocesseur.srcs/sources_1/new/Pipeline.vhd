@@ -132,7 +132,7 @@ begin
                 when "00000111" => -- LOAD
                     DI_EX.B <= LI_DI.B;
                 when "00001000" => -- STORE
-                    DI_EX.B <= LI_DI.B;
+                    DI_EX.B <= reg_QA;
                 when others =>
                     null;
             end case;
@@ -152,8 +152,10 @@ begin
             case DI_EX.OP is
                 when "00000001" | "00000010" | "00000011" | "00000100" => -- ADD.MUL.SOU.DIV
                     EX_MEM.B <= alu_Res;
+                    data_rw <= '1'; -- to not write in these instructions
                 when "00000101" | "00000110" => -- COP,AFC
                     EX_MEM.B <= DI_EX.B;
+                    data_rw <= '1'; -- to not write in these instructions
                 when "00000111" => --LOAD
                     EX_MEM.B <= DI_EX.B;
                     data_addr <= DI_EX.B;
@@ -164,7 +166,7 @@ begin
                     data_in <= DI_EX.B;
                     data_rw <= '0';  
                 when others =>
-                    null;
+                    data_rw <= '1';
             end case;
         end if;
     end process;
@@ -180,8 +182,8 @@ begin
             case EX_MEM.OP is
                 when "00000001" | "00000010" | "00000011" | "00000100" | "00000101" | "00000110" => -- ADD.MUL.SOU.DIV
                     MEM_RE.B <= EX_MEM.B;
-                when "00000111" | "00001000"  => --LOAD,STORE
-                    MEM_RE.B <= data_out;      
+                when "00000111" | "00001000" => --LOAD, STORE
+                    MEM_RE.B <= data_out; 
                 when others =>
                     MEM_RE.B <= EX_MEM.B; 
             end case;
@@ -198,7 +200,7 @@ begin
                     reg_ADD_W <= MEM_RE.A(3 downto 0);
                     reg_W <= '1';
                 when others =>
-                    null;
+                    reg_W <= '0';
             end case;
         end if;
     end process;

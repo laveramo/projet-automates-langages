@@ -1,0 +1,376 @@
+#-----------------------------------------------------------
+# Vivado v2023.1 (64-bit)
+# SW Build 3865809 on Sun May  7 15:04:56 MDT 2023
+# IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
+# SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
+# Start of session at: Fri May 31 10:33:19 2024
+# Process ID: 17843
+# Current directory: /home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.runs/synth_1
+# Command line: vivado -log Processeur.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Processeur.tcl
+# Log file: /home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.runs/synth_1/Processeur.vds
+# Journal file: /home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.runs/synth_1/vivado.jou
+# Running On: insa-10581, OS: Linux, CPU Frequency: 1197.524 MHz, CPU Physical cores: 4, Host memory: 16677 MB
+#-----------------------------------------------------------
+source Processeur.tcl -notrace
+create_project: Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1279.891 ; gain = 8.023 ; free physical = 7112 ; free virtual = 19656
+Command: read_checkpoint -auto_incremental -incremental /home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/utils_1/imports/synth_1/Processeur.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from /home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/utils_1/imports/synth_1/Processeur.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top Processeur -part xc7k70tfbv676-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7k70t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7k70t'
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 17894
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1697.348 ; gain = 384.738 ; free physical = 6433 ; free virtual = 18981
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'Processeur' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Processeur.vhd:41]
+INFO: [Synth 8-3491] module 'Pipeline' declared at '/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:27' bound to instance 'pipe' of component 'Pipeline' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Processeur.vhd:130]
+INFO: [Synth 8-638] synthesizing module 'Pipeline' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:54]
+WARNING: [Synth 8-614] signal 'instr_data' is read in the process but is not in the sensitivity list [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:73]
+WARNING: [Synth 8-614] signal 'LI_DI' is read in the process but is not in the sensitivity list [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:96]
+WARNING: [Synth 8-614] signal 'reg_QA' is read in the process but is not in the sensitivity list [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:96]
+WARNING: [Synth 8-614] signal 'reg_QB' is read in the process but is not in the sensitivity list [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:96]
+WARNING: [Synth 8-614] signal 'DI_EX' is read in the process but is not in the sensitivity list [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:144]
+WARNING: [Synth 8-614] signal 'alu_Res' is read in the process but is not in the sensitivity list [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:144]
+WARNING: [Synth 8-614] signal 'EX_MEM' is read in the process but is not in the sensitivity list [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:175]
+WARNING: [Synth 8-614] signal 'data_out' is read in the process but is not in the sensitivity list [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:175]
+WARNING: [Synth 8-614] signal 'MEM_RE' is read in the process but is not in the sensitivity list [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:194]
+INFO: [Synth 8-256] done synthesizing module 'Pipeline' (0#1) [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:54]
+INFO: [Synth 8-3491] module 'MemoireInstructions' declared at '/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/MemoireInstructions.vhd:35' bound to instance 'mem_ins' of component 'MemoireInstructions' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Processeur.vhd:131]
+INFO: [Synth 8-638] synthesizing module 'MemoireInstructions' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/MemoireInstructions.vhd:41]
+INFO: [Synth 8-256] done synthesizing module 'MemoireInstructions' (0#1) [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/MemoireInstructions.vhd:41]
+INFO: [Synth 8-3491] module 'BancRegistres' declared at '/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:36' bound to instance 'registres' of component 'BancRegistres' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Processeur.vhd:132]
+INFO: [Synth 8-638] synthesizing module 'BancRegistres' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:49]
+WARNING: [Synth 8-614] signal 'W' is read in the process but is not in the sensitivity list [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:53]
+WARNING: [Synth 8-614] signal 'DATA' is read in the process but is not in the sensitivity list [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:53]
+WARNING: [Synth 8-614] signal 'ADD_W' is read in the process but is not in the sensitivity list [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:53]
+INFO: [Synth 8-256] done synthesizing module 'BancRegistres' (0#1) [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:49]
+INFO: [Synth 8-3491] module 'ALU' declared at '/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/imports/ALU/ALU.vhd:8' bound to instance 'ual' of component 'ALU' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Processeur.vhd:133]
+INFO: [Synth 8-638] synthesizing module 'ALU' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/imports/ALU/ALU.vhd:26]
+WARNING: [Synth 8-614] signal 'tmp' is read in the process but is not in the sensitivity list [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/imports/ALU/ALU.vhd:32]
+INFO: [Synth 8-256] done synthesizing module 'ALU' (0#1) [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/imports/ALU/ALU.vhd:26]
+INFO: [Synth 8-3491] module 'MemoireDonnees' declared at '/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/MemoireDonnees.vhd:35' bound to instance 'mem_don' of component 'MemoireDonnees' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Processeur.vhd:134]
+INFO: [Synth 8-638] synthesizing module 'MemoireDonnees' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/MemoireDonnees.vhd:44]
+INFO: [Synth 8-256] done synthesizing module 'MemoireDonnees' (0#1) [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/MemoireDonnees.vhd:44]
+INFO: [Synth 8-256] done synthesizing module 'Processeur' (0#1) [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Processeur.vhd:41]
+WARNING: [Synth 8-7129] Port instr_data[7] in module Pipeline is either unconnected or has no load
+WARNING: [Synth 8-7129] Port instr_data[6] in module Pipeline is either unconnected or has no load
+WARNING: [Synth 8-7129] Port instr_data[5] in module Pipeline is either unconnected or has no load
+WARNING: [Synth 8-7129] Port instr_data[4] in module Pipeline is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1813.316 ; gain = 500.707 ; free physical = 6283 ; free virtual = 18834
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1825.191 ; gain = 512.582 ; free physical = 6288 ; free virtual = 18839
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7k70tfbv676-1
+INFO: [Device 21-403] Loading part xc7k70tfbv676-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1833.195 ; gain = 520.586 ; free physical = 6287 ; free virtual = 18838
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-327] inferring latch for variable 'reg_W_reg' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:201]
+WARNING: [Synth 8-327] inferring latch for variable 'reg_ADD_A_reg' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:85]
+WARNING: [Synth 8-327] inferring latch for variable 'reg_ADD_B_reg' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:86]
+WARNING: [Synth 8-327] inferring latch for variable 'reg_ADD_W_reg' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:200]
+WARNING: [Synth 8-327] inferring latch for variable 'reg_DATA_reg' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:199]
+WARNING: [Synth 8-327] inferring latch for variable 'alu_Num1_reg' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:109]
+WARNING: [Synth 8-327] inferring latch for variable 'alu_Num2_reg' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:110]
+WARNING: [Synth 8-327] inferring latch for variable 'alu_OP_reg' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:108]
+WARNING: [Synth 8-327] inferring latch for variable 'data_addr_reg' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:161]
+WARNING: [Synth 8-327] inferring latch for variable 'data_in_reg' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:166]
+WARNING: [Synth 8-327] inferring latch for variable 'data_rw_reg' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:155]
+WARNING: [Synth 8-327] inferring latch for variable 'MEM_RE_reg[OP]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:178]
+WARNING: [Synth 8-327] inferring latch for variable 'MEM_RE_reg[A]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:178]
+WARNING: [Synth 8-327] inferring latch for variable 'MEM_RE_reg[B]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:178]
+WARNING: [Synth 8-327] inferring latch for variable 'LI_DI_reg[OP]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:76]
+WARNING: [Synth 8-327] inferring latch for variable 'DI_EX_reg[OP]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:99]
+WARNING: [Synth 8-327] inferring latch for variable 'DI_EX_reg[A]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:99]
+WARNING: [Synth 8-327] inferring latch for variable 'DI_EX_reg[B]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:99]
+WARNING: [Synth 8-327] inferring latch for variable 'EX_MEM_reg[OP]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:147]
+WARNING: [Synth 8-327] inferring latch for variable 'EX_MEM_reg[A]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:147]
+WARNING: [Synth 8-327] inferring latch for variable 'EX_MEM_reg[B]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:147]
+WARNING: [Synth 8-327] inferring latch for variable 'LI_DI_reg[A]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:76]
+WARNING: [Synth 8-327] inferring latch for variable 'LI_DI_reg[B]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/Pipeline.vhd:76]
+WARNING: [Synth 8-327] inferring latch for variable 'registers_reg[0]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'registers_reg[1]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'registers_reg[2]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'registers_reg[3]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'registers_reg[4]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'registers_reg[5]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'registers_reg[6]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'registers_reg[7]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'registers_reg[8]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'registers_reg[9]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'registers_reg[10]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'registers_reg[11]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'registers_reg[12]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'registers_reg[13]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'registers_reg[14]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'registers_reg[15]' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/new/BancRegistres.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'Res_reg' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/imports/ALU/ALU.vhd:36]
+WARNING: [Synth 8-327] inferring latch for variable 'tmp_reg' [/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.srcs/sources_1/imports/ALU/ALU.vhd:40]
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1855.148 ; gain = 542.539 ; free physical = 6236 ; free virtual = 18808
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input    8 Bit       Adders := 1     
++---XORs : 
+	   2 Input      8 Bit         XORs := 1     
++---Registers : 
+	               28 Bit    Registers := 1     
+	                8 Bit    Registers := 257   
++---Muxes : 
+	 256 Input   28 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 5     
+	   5 Input    8 Bit        Muxes := 2     
+	   3 Input    8 Bit        Muxes := 1     
+	   9 Input    8 Bit        Muxes := 1     
+	   8 Input    8 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 1     
+	   9 Input    3 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 282   
+	   3 Input    1 Bit        Muxes := 2     
+	   9 Input    1 Bit        Muxes := 3     
+	   5 Input    1 Bit        Muxes := 4     
+	   8 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_W_reg) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_ADD_A_reg[3]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_ADD_A_reg[2]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_ADD_A_reg[1]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_ADD_A_reg[0]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_ADD_B_reg[3]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_ADD_B_reg[2]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_ADD_B_reg[1]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_ADD_B_reg[0]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_ADD_W_reg[3]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_ADD_W_reg[2]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_ADD_W_reg[1]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_ADD_W_reg[0]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_DATA_reg[7]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_DATA_reg[6]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_DATA_reg[5]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_DATA_reg[4]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_DATA_reg[3]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_DATA_reg[2]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_DATA_reg[1]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/reg_DATA_reg[0]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_Num1_reg[7]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_Num1_reg[6]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_Num1_reg[5]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_Num1_reg[4]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_Num1_reg[3]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_Num1_reg[2]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_Num1_reg[1]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_Num1_reg[0]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_Num2_reg[7]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_Num2_reg[6]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_Num2_reg[5]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_Num2_reg[4]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_Num2_reg[3]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_Num2_reg[2]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_Num2_reg[1]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_Num2_reg[0]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_OP_reg[2]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_OP_reg[1]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/alu_OP_reg[0]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/data_addr_reg[7]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/data_addr_reg[6]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/data_addr_reg[5]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/data_addr_reg[4]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/data_addr_reg[3]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/data_addr_reg[2]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/data_addr_reg[1]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/data_addr_reg[0]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/data_in_reg[7]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/data_in_reg[6]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/data_in_reg[5]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/data_in_reg[4]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/data_in_reg[3]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/data_in_reg[2]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/data_in_reg[1]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/data_in_reg[0]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/data_rw_reg) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[OP][7]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[OP][6]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[OP][5]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[OP][4]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[OP][3]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[OP][2]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[OP][1]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[OP][0]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[A][7]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[A][6]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[A][5]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[A][4]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[A][3]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[A][2]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[A][1]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[A][0]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[B][7]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[B][6]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[B][5]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[B][4]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[B][3]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[B][2]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[B][1]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/MEM_RE_reg[B][0]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/LI_DI_reg[OP][7]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/LI_DI_reg[OP][6]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/LI_DI_reg[OP][5]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/LI_DI_reg[OP][4]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/LI_DI_reg[OP][3]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/LI_DI_reg[OP][2]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/LI_DI_reg[OP][1]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/LI_DI_reg[OP][0]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/DI_EX_reg[OP][7]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/DI_EX_reg[OP][6]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/DI_EX_reg[OP][5]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/DI_EX_reg[OP][4]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/DI_EX_reg[OP][3]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/DI_EX_reg[OP][2]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/DI_EX_reg[OP][1]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/DI_EX_reg[OP][0]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/DI_EX_reg[A][7]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/DI_EX_reg[A][6]) is unused and will be removed from module Processeur.
+WARNING: [Synth 8-3332] Sequential element (pipe/DI_EX_reg[A][5]) is unused and will be removed from module Processeur.
+INFO: [Common 17-14] Message 'Synth 8-3332' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:14 ; elapsed = 00:00:18 . Memory (MB): peak = 1929.648 ; gain = 617.039 ; free physical = 6163 ; free virtual = 18748
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:14 ; elapsed = 00:00:18 . Memory (MB): peak = 1929.648 ; gain = 617.039 ; free physical = 6161 ; free virtual = 18747
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:14 ; elapsed = 00:00:18 . Memory (MB): peak = 1929.648 ; gain = 617.039 ; free physical = 6161 ; free virtual = 18747
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:17 ; elapsed = 00:00:21 . Memory (MB): peak = 1929.648 ; gain = 617.039 ; free physical = 6159 ; free virtual = 18745
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:17 ; elapsed = 00:00:21 . Memory (MB): peak = 1929.648 ; gain = 617.039 ; free physical = 6159 ; free virtual = 18745
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:17 ; elapsed = 00:00:21 . Memory (MB): peak = 1929.648 ; gain = 617.039 ; free physical = 6159 ; free virtual = 18745
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:17 ; elapsed = 00:00:21 . Memory (MB): peak = 1929.648 ; gain = 617.039 ; free physical = 6159 ; free virtual = 18745
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:17 ; elapsed = 00:00:21 . Memory (MB): peak = 1929.648 ; gain = 617.039 ; free physical = 6159 ; free virtual = 18745
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:17 ; elapsed = 00:00:21 . Memory (MB): peak = 1929.648 ; gain = 617.039 ; free physical = 6159 ; free virtual = 18745
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++-+-----+------+
+| |Cell |Count |
++-+-----+------+
++-+-----+------+
+
+Report Instance Areas: 
++------+---------+-------+------+
+|      |Instance |Module |Cells |
++------+---------+-------+------+
+|1     |top      |       |     0|
++------+---------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:17 ; elapsed = 00:00:21 . Memory (MB): peak = 1929.648 ; gain = 617.039 ; free physical = 6159 ; free virtual = 18745
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 364 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:17 ; elapsed = 00:00:21 . Memory (MB): peak = 1929.648 ; gain = 617.039 ; free physical = 6159 ; free virtual = 18745
+Synthesis Optimization Complete : Time (s): cpu = 00:00:17 ; elapsed = 00:00:21 . Memory (MB): peak = 1929.656 ; gain = 617.039 ; free physical = 6159 ; free virtual = 18745
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1929.656 ; gain = 0.000 ; free physical = 6157 ; free virtual = 18745
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2014.305 ; gain = 0.000 ; free physical = 6354 ; free virtual = 18955
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 47438443
+INFO: [Common 17-83] Releasing license: Synthesis
+32 Infos, 159 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 2014.305 ; gain = 710.602 ; free physical = 6354 ; free virtual = 18955
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1571.663; main = 1327.292; forked = 385.463
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 2907.602; main = 2014.309; forked = 977.949
+INFO: [Common 17-1381] The checkpoint '/home/vera-morales/PSI/projet-automates-langages/Microprocesseur/Microprocesseur.runs/synth_1/Processeur.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file Processeur_utilization_synth.rpt -pb Processeur_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Fri May 31 10:33:56 2024...
