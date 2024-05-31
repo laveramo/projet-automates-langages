@@ -26,15 +26,6 @@ void set_jump(int inst_index) {
 }
 
 void print_inst_tab() {
-    // printf("\t\tASM\t\t\t\n");
-    // for(int i = 0; i < inst_cont; i ++) {
-    //     printf("%s\t", tab_instruct[i].ins_name);
-    //     printf("%d\t", tab_instruct[i].op1);
-    //     printf("%d\t", tab_instruct[i].op2);
-    //     printf("%d\n", tab_instruct[i].op3);
-    //     printf("-------------------------------------------\n");
-    // } 
-
     printf(BOLDMAGENTA "\t\t\tASM\n" RESET);
     printf("|---------------------------------------------|\n");
     printf("| Instruction     |  Op1  |   Op2   |   Op3   |\n");
