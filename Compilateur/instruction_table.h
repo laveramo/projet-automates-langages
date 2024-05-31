@@ -31,7 +31,7 @@ int get_inst_cont();
 
 /*
 * @fn get_inst_jump
-* @brief Returns the jump of an instruction
+* @brief Sets the jump of an instruction
 * @param inst_index Index of the instruction
 */
 void set_jump(int inst_index);

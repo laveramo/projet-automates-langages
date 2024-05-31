@@ -22,6 +22,15 @@ struct symbol {
 int search_symbol(char name[]);
 
 /*
+* @fn search_symbol_by_scope
+* @brief Search for a symbol in the symbol table by scope and returns its index, if it doesn't find it returns -1
+* @param name Name of the symbol to search
+* @param scope Scope of the symbol to search
+* @return Index of the symbol in the symbol table
+*/
+int search_symbol_by_scope(char name[], int scope);
+
+/*
 * @fn add_symbol
 * @brief Adds a symbol to the symbol table
 * @param name Name of the symbol

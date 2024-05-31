@@ -2,6 +2,9 @@
 #include "symbol_table.h"
 #include "instruction_table.h"
 
+#define YELLOW  "\033[33m"      /* Yellow */
+#define RESET   "\033[0m"
+
 int yylex(void);
 void yyerror(char *s);
 
@@ -99,7 +102,7 @@ assert : item_assert tLT item_assert
     | item_assert
 ;
 
-assign_instruction : identifier tASSIGN expression tSEMI { copy_to_last_tmp($1); printf("assign"); }
+assign_instruction : identifier tASSIGN expression tSEMI { copy_to_last_tmp($1); }
     | identifier tASSIGN fun_call tSEMI
 ;
 
@@ -131,10 +134,12 @@ print_instruction : tPRINT tLPAR expression tRPAR tSEMI;
 void yyerror(char *s) { fprintf(stderr, "%s\n", s); }
 
 int main(void) {
-    printf("==== PARSER ====\n"); // yydebug=1;
+    printf(YELLOW "===================== PARSER =====================\n" RESET); // yydebug=1;
     yyparse();
     print_tab();
     printf("\n");
     print_inst_tab();
+    printf("\n");
+    printf(YELLOW "==================================================\n" RESET);
     return 0;
 }
